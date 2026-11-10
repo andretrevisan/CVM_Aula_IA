@@ -77,8 +77,9 @@ try {
     header('Content-Disposition: attachment; filename="' . $nomeArquivoSeguro . '"');
     header('Content-Transfer-Encoding: binary');
     header('Expires: 0');
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Pragma: public');
+    // Evita que faturas com dados pessoais fiquem armazenadas em caches compartilhados.
+    header('Cache-Control: private, no-store, no-cache, must-revalidate');
+    header('Pragma: no-cache');
     header('Content-Length: ' . filesize($caminhoCompleto));
 
     // Lê e envia o arquivo para o navegador do cliente de forma eficiente
